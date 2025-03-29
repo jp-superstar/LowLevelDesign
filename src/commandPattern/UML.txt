@@ -1,0 +1,38 @@
++------------------+        +----------------------+
+|    Command       |<-------|     Typing           |
+|------------------|        |----------------------|
+| +execute()       |        | - textEditor         |
+| +undo()          |        | - insertInContent    |
++------------------+        | +execute(), +undo()  |
+         ^                  +----------------------+
+         | implements
+         |
+         |                  +----------------------+
+         |                  |     Delete           |
+         |                  |----------------------|
+         |                  | - textEditor         |
+         |                  | - deleteChars        |
+         |                  | - deletedContent     |
+         |                  | +execute(), +undo()  |
+         |                  +----------------------+
+         |
++------------------+
+|  EditorInvoker   |------------------+
+|------------------|                  |
+| - command        |                  |
+| - commandHistory | uses Command     |
+|------------------|                  |
+| +setCommand()    |                  |
+| +executeCommand()|                  |
+| +undo()          |                  |
++------------------+                  |
+                                      |
+                            +-------------------+
+                            |    TextEditor     |
+                            |-------------------|
+                            | - content         |
+                            |-------------------|
+                            | +typeContent()    |
+                            | +deleteContent()  |
+                            | +getContent()     |
+                            +-------------------+
